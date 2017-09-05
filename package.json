@@ -1,0 +1,42 @@
+{
+  "name": "bbt-cli",
+  "version": "0.0.1",
+  "description": "CLI helper for project initialization",
+  "main": "./bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run lint-staged",
+    "lint-staged": "lint-staged"
+  },
+  "bin": {
+    "bbt": "./bin/index.js"
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackbird-team/bbt-cli.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blackbird-team/bbt-cli/issues"
+  },
+  "homepage": "https://github.com/blackbird-team/bbt-cli#readme",
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-bbt": "git+https://github.com/blackbird-team/eslint-config-bbt.git",
+    "lint-staged": "^4.1.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.6.1"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "colors": "^1.1.2",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "yargs": "^8.0.2"
+  }
+}
