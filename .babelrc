@@ -1,0 +1,15 @@
+{
+	"presets" : ["es2015"],
+	"plugins": [
+		["babel-plugin-root-import",
+			[{
+				"rootPathPrefix": "~",
+				"rootPathSuffix": "source/js"
+			},
+            {
+				"rootPathPrefix": "@",
+				"rootPathSuffix": "source/js/data"
+            }]
+		]
+	]
+}
