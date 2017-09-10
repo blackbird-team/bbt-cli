@@ -126,7 +126,42 @@ const Messages = {
 		"    Or type 'NOT' for not install this module:",
 		""
 	],
-	moduleCheckSuccess: [`      ${green("{sss}")} {sss}`]
+	moduleCheckSuccess: [`      ${green("{sss}")} {sss}`],
+	commandLintStart: [
+		"",
+		green("====================="),
+		green("  ESLint Initialization"),
+		green("----------------"),
+		"",
+		"   Install ESLint dependencies..."
+	],
+	commandLintSuccess: [
+		"",
+		green("====================="),
+		green("  ESLint initialization successfully completed"),
+		green("====================="),
+		"",
+		"   Install ESLint dependencies..."
+	],
+	lintInstallDepsSuccess: [
+		"",
+		`   Install ESLint dependencies ${green("completed")}`,
+		""
+	],
+	lintInstallDepsFail: [
+		"",
+		red("====================="),
+		red("  ESLint init failed"),
+		red("====================="),
+		""
+	],
+	lintConfigWriteStart: [
+		`   Write file config ${yellow(".eslintrc")}...`
+	],
+	lintConfigWriteDone: [
+		`   Write ESLint config ${green("done")}`
+	]
+
 };
 
 export default Messages;
