@@ -9,6 +9,7 @@ const handler = argv => {
 module.exports = {
 	command: "init",
 	desc: `Initialization of the project`,
+	alias: "i",
 	handler,
 	builder: {
 		bbt: {
@@ -30,14 +31,13 @@ module.exports = {
 		type: {
 			type: "string",
 			alias: "t",
-			demand: false,
 			desc: `Type of project: \r\n["front", "service", "back", "standalone", "npm"]`
 		},
 		fast: {
 			type: "boolean",
 			alias: "f",
 			default: false,
-			desc: "it will use only defaults and not prompt you for most options"
+			desc: "It will use only defaults and not prompt you for most options"
 		}
 	}
 };
