@@ -102,31 +102,31 @@ const Messages = {
 		""
 	],
 	setRemoteRepoFailError: ["", `  ${red("Error:")} {sss}`, ""],
-	requestStatusCode: ["", `  ${red("Error:")} StatusCode: {sss}`, ""],
-	modulesCheckStart: ["", `  Check list of dependencies for {sss}...`, ""],
-	modulesCheckEnd: ["", `  Check {sss} dependencies ${green("comlete")}`, ""],
-	modulesInstallStart: [`  Instalation dependencies for {sss}...`],
+	requestStatusCode: ["", `    ${red("Error:")} StatusCode: {sss}`, ""],
+	modulesCheckStart: ["", `    Check list of dependencies for {sss}...`, ""],
+	modulesCheckEnd: ["", `    Check {sss} dependencies ${green("comlete")}`, ""],
+	modulesInstallStart: [`    Instalation dependencies for {sss}...`],
 	modulesInstallFinish: [
-		`  Instalation {sss} dependencies ${green("comlete")}`
+		`    Instalation {sss} dependencies ${green("comlete")}`
 	],
 	modulesInstallFail: [
 		"",
-		`  Instalation {sss} dependencies ${red("FAILED")} with {sss}`,
+		`    Instalation {sss} dependencies ${red("FAILED")} with {sss}`,
 		""
 	],
 	moduleCheckError: [
 		"",
-		`  Check module {sss} ${red("FAILED")} with: {sss}`,
+		`    Check module {sss} ${red("FAILED")} with: {sss}`,
 		""
 	],
 	moduleCheckFail: [
-		`  Check module {sss} ${red("FAILED")}`,
+		`    Check module {sss} ${red("FAILED")}`,
 		"",
 		yellow("  Enter the correct module name"),
 		"    Or type 'NOT' for not install this module:",
 		""
 	],
-	moduleCheckSuccess: [`${green("{sss}")} {sss}`]
+	moduleCheckSuccess: [`      ${green("{sss}")} {sss}`]
 };
 
 export default Messages;
