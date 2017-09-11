@@ -26,7 +26,7 @@ module.exports = {
 		npm: {
 			type: "boolean",
 			default: true,
-			desc: "npm init"
+			desc: "Switch over run npm init"
 		},
 		type: {
 			type: "string",
