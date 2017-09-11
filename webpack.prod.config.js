@@ -1,4 +1,5 @@
 /*	eslint import/no-extraneous-dependencies:0	*/
+const webpack = require("webpack");
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const fs = require("fs");
 
@@ -6,12 +7,14 @@ const nodeModules = {};
 fs
 	.readdirSync("node_modules")
 	.filter(x => [".bin"].indexOf(x) === -1)
-	.forEach(mod => {nodeModules[mod] = `commonjs ${mod}`});
+	.forEach(mod => {
+		nodeModules[mod] = `commonjs ${mod}`;
+	});
 
 module.exports = {
 	context: `${__dirname}/source/`,
 	target: "node",
-	devtool: 'source-map',
+	devtool: "source-map",
 	externals: nodeModules,
 	entry: [`${__dirname}/source/js/index.js`],
 	output: {
@@ -31,6 +34,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new MinifyPlugin()
+		new MinifyPlugin(),
+		new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true })
 	]
 };
