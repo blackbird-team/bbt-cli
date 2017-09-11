@@ -1,12 +1,14 @@
 import { each } from "lodash";
-import fs from "fs";
-import path from "path";
+import { existsSync, writeFileSync, readFileSync } from "fs";
+import { resolve } from "path";
 import DepsInstaller from "~/controllers/depsInstaller";
 import Messages from "@/messages";
 
 class Lint {
+
 	argv = null;
-	config = { extends: [] };
+	config = null;
+	pathConfig = resolve("./.eslintrc");
 
 	constructor(options) {
 		this.argv = options.argv;
@@ -14,6 +16,8 @@ class Lint {
 	}
 
 	init() {
+		this.getConfig();
+
 		each(this.argv.configs, val => {
 			if (val === "prettier") DepsInstaller.append("dev", "prettier");
 			this.appendExtends(val);
@@ -25,6 +29,24 @@ class Lint {
 		});
 
 		Lint.installDeps().then(this.saveConfig.bind(this));
+	}
+
+	getConfig() {
+		if (existsSync(this.pathConfig)) this.setLocalConfig();
+		else this.setDefaultConfig();
+	}
+
+	setLocalConfig() {
+		try {
+			const q = readFileSync(this.pathConfig);
+			this.config = JSON.parse(q);
+		} catch (e) {
+			this.setDefaultConfig();
+		}
+	}
+
+	setDefaultConfig() {
+		this.config = { extends: [] };
 	}
 
 	appendExtends(name) {
@@ -45,10 +67,10 @@ class Lint {
 		DepsInstaller.append("dev", "pre-commit");
 
 		let file = {};
-		const p = path.resolve("./package.json");
+		const p = resolve("./package.json");
 
 		try {
-			const q = fs.readFileSync(p);
+			const q = readFileSync(p);
 			file = JSON.parse(q);
 		} catch (e) {
 			console.log("package.json corrupted");
@@ -58,7 +80,7 @@ class Lint {
 		file["pre-commit"] = "lint-staged";
 		file["lint-staged"] = { "*.js": "eslint" };
 
-		fs.writeFileSync(p, JSON.stringify(file, null, 2));
+		writeFileSync(p, JSON.stringify(file, null, 2));
 	}
 
 	static async installDeps() {
@@ -76,8 +98,7 @@ class Lint {
 		Messages.console("lintConfigWriteStart");
 
 		try {
-			const p = path.resolve(`./.eslintrc`);
-			fs.writeFileSync(p, JSON.stringify(this.config, null, 2), "utf8");
+			writeFileSync(this.pathConfig, JSON.stringify(this.config, null, 2), "utf8");
 
 			Messages.console("lintConfigWriteDone");
 			Messages.console("commandLintSuccess");
