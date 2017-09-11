@@ -141,7 +141,6 @@ const Messages = {
 		green("  ESLint initialization successfully completed"),
 		green("====================="),
 		"",
-		"   Install ESLint dependencies..."
 	],
 	lintInstallDepsSuccess: [
 		"",

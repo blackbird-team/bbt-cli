@@ -62,7 +62,7 @@ class Lint {
 	}
 
 	static async installDeps() {
-		Messages.console("commandInitStart");
+		Messages.console("commandLintStart");
 
 		try {
 			await DepsInstaller.install("dev");
