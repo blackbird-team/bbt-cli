@@ -10,12 +10,13 @@ class GitInit {
 	}
 
 	async init() {
+		GitInit.checkoutLocal();
+
 		if(this.argv.github === "later") {
 			Messages.console("setRemoteRepoPostponed");
 			return;
-		};
+		}
 
-		GitInit.checkoutLocal();
 		await this.appendRemote();
 
 		console.log(green("----------------\r\n"));
