@@ -6,3 +6,5 @@ npm-debug.json
 package-lock.json
 
 /bin/*
+
+/projectsStructures/front-bbt.zip
