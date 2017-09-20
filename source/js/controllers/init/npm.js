@@ -31,10 +31,11 @@ class NpmInit {
 		try {
 			let command = `npm init`;
 			command += this.argv.fast ? ` -y` : ``;
-			execSync(command, { stdio: [0, 1, 2] });
-			global.console.log("npm init success");
+			const con = this.argv.fast ? null : { stdio: [0, 1, 2] };
+			execSync(command, con);
+			global.console.log("npm init success\r\n");
 		} catch (e) {
-			global.console.log(red(`npm init aborted`));
+			global.console.log(red(`npm init aborted\r\n`));
 		}
 	}
 }
