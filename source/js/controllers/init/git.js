@@ -90,6 +90,12 @@ class GitInit {
 	changeRemote() {
 		execSync(`git remote set-url ${this.remoteName} ${this.argv.github}`);
 	}
+
+	static firstCommit() {
+		execSync(`git add .gitignore`);
+		execSync(`git add .`);
+		execSync(`git commit -m"First commit"`);
+	}
 }
 
 module.exports = GitInit;
