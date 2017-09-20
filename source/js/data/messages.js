@@ -159,6 +159,16 @@ const Messages = {
 	],
 	lintConfigWriteDone: [
 		`   Write ESLint config ${green("done")}`
+	],
+	firstCommitSuccess: [
+		`First commit ${green("created")}`,
+		""
+	],
+	firstCommitFail: [
+		`Something went ${red("wrong")} with "First commit"`,
+		`Maybe is already done. Check it:`,
+		yellow("git log --oneline -5"),
+		""
 	]
 
 };
