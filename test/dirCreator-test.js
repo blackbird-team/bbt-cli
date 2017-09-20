@@ -15,7 +15,7 @@ const dir = [
 	},
 	{
 		dir: `/projectsStructures/front-bbt/source/js/stores`,
-		files: [{ name: "historyStore.js", source: "" }]
+		files: [{ name: "history.js", source: "" }]
 	},
 	{
 		dir: `/projectsStructures/front-bbt/source/js/views`,

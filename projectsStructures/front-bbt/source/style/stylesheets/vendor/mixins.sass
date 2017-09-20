@@ -1,0 +1,145 @@
+//=================================
+//	mixins.sass
+//=================================
+//	Содержание:
+//-----
+//	I Grid helper
+//	= 1. Margin
+//	= 2. Padding
+//
+//	II Shadow Generator
+//	= 1. Main
+//	= 2. Disable shadow
+//
+//	III Transform generator
+//	=	1. General
+//	=	2. Rotate
+//	=	3. Scale
+//	=	4. Translate
+//	=	5. Skew
+//	=	6. Transform origin
+//
+//	IV Gradient
+//	= 1. Gradient 1-2-1
+//_________________________________
+
+//=================================
+//	I Grid helper
+//---------------------------------
+//	= 1. Margin
+//---------------------------------
+@mixin mAll($n)
+  margin: $n
+
+@mixin mVert($n)
+  margin: $n 0
+
+@mixin mHori($n)
+  margin: 0 $n
+
+//---------------------------------
+//	= 2. Padding
+//---------------------------------
+@mixin pAll($n)
+  padding: $n
+
+@mixin pVert($n)
+  padding: $n 0
+
+@mixin pHori($n)
+  padding: 0 $n
+
+//=================================
+//	II Shadow Generator
+//---------------------------------
+//	= 1. Main
+//---------------------------------
+@mixin box-shadow($top, $left, $blur, $color, $inset: false)
+  @if $inset
+    -webkit-box-shadow:inset $top $left $blur $color
+    -moz-box-shadow:inset $top $left $blur $color
+    box-shadow:inset $top $left $blur $color
+  @else
+    -webkit-box-shadow: $top $left $blur $color
+    -moz-box-shadow: $top $left $blur $color
+    box-shadow: $top $left $blur $color
+
+@mixin box-shadow-impo($top, $left, $blur, $color, $inset: false)
+  @if $inset
+    -webkit-box-shadow:inset $top $left $blur $color !important
+    -moz-box-shadow:inset $top $left $blur $color !important
+    box-shadow:inset $top $left $blur $color !important
+  @else
+    -webkit-box-shadow: $top $left $blur $color !important
+    -moz-box-shadow: $top $left $blur $color !important
+    box-shadow: $top $left $blur $color !important
+
+//---------------------------------
+//	= 2. Disable shadow
+//---------------------------------
+@mixin box-shadow-none()
+  -webkit-box-shadow: none
+  -moz-box-shadow: none
+  box-shadow: none
+
+//=================================
+//	III Transform generator
+//---------------------------------
+//	= 1. General
+//---------------------------------
+@mixin transform($transforms)
+  -moz-transform: $transforms
+  -o-transform: $transforms
+  -ms-transform: $transforms
+  -webkit-transform: $transforms
+  transform: $transforms
+
+//---------------------------------
+//	= 2. Rotate
+//---------------------------------
+@mixin rotate($deg)
+  @include transform(rotate(#{$deg}deg))
+
+//---------------------------------
+//	= 3. Scale
+//---------------------------------
+@mixin scale($scale)
+  @include transform(scale($scale))
+
+
+//---------------------------------
+//	= 4. Translate
+//---------------------------------
+@mixin translate($x, $y)
+  @include transform(translate($x, $y))
+
+//---------------------------------
+//	= 5. Skew
+//---------------------------------
+@mixin skew($x, $y)
+  @include transform(skew(#{$x}deg, #{$y}deg))
+
+//---------------------------------
+//	= 6. Transform origin
+//---------------------------------
+@mixin transform-origin ($origin)
+  moz-transform-origin: $origin
+  -o-transform-origin: $origin
+  -ms-transform-origin: $origin
+  -webkit-transform-origin: $origin
+  transform-origin: $origin
+
+//=================================
+//	IV Gradient
+//---------------------------------
+//	= 1. Gradient 1-2-1
+//---------------------------------
+@mixin gradient-triple($s, $c, $sHex, $cHex)
+  background: $s
+  background: -moz-linear-gradient(left, $s 0%, $c 50%, $s 100%)
+  background: -webkit-gradient(left top, right top, color-stop(0%, $s), color-stop(50%, $c), color-stop(100%, $s))
+  background: -webkit-linear-gradient(left, $s 0%, $c 50%, $s 100%)
+  background: -o-linear-gradient(left, $s 0%, $c 50%, $s 100%)
+  background: -ms-linear-gradient(left, $s 0%, $c 50%, $s 100%)
+  background: linear-gradient(to right, $s 0%, $c 50%, $s 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$sHex}', endColorstr='#{$cHex}', GradientType=1 )

@@ -1,0 +1,15 @@
+{
+  "presets" : ["es2015", "es2017", "react"],
+  "plugins": [
+    ["babel-plugin-root-import", 
+    	[{
+	      "rootPathPrefix": "~", // `~` is the default so you can remove this if you want
+	      "rootPathSuffix": "source/js"
+	    },
+	    {
+	      "rootPathPrefix": "@",
+	      "rootPathSuffix": "source/data"
+	    }]
+    ]
+  ]
+}

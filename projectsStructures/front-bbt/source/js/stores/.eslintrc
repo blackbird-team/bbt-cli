@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "class-methods-use-this": ["error", { "exceptMethods": ["update"] }],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "no-param-reassign": ["error", { "ignorePropertyModificationsFor": ["state"] }]
+  }
+}
