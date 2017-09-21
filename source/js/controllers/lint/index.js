@@ -1,4 +1,4 @@
-import { each } from "lodash";
+import { each, union } from "lodash";
 import { existsSync, writeFileSync, readFileSync } from "fs";
 import { resolve } from "path";
 import DepsInstaller from "~/controllers/depsInstaller";
@@ -15,7 +15,7 @@ class Lint {
 		DepsInstaller.append("dev", "eslint");
 	}
 
-	init() {
+	async init(install = true) {
 		this.getConfig();
 
 		each(this.argv.configs, val => {
@@ -28,7 +28,8 @@ class Lint {
 			if (val === "pre-commit") Lint.appendPreCommit();
 		});
 
-		Lint.installDeps().then(this.saveConfig.bind(this));
+		if(install === true) await Lint.installDeps();
+		this.saveConfig();
 	}
 
 	getConfig() {
@@ -50,7 +51,7 @@ class Lint {
 	}
 
 	appendExtends(name) {
-		this.config.extends.push(name);
+		this.config.extends = union(this.config.extends, [name]);
 		DepsInstaller.append("dev", `eslint-config-${name}`);
 	}
 
@@ -103,7 +104,7 @@ class Lint {
 			Messages.console("lintConfigWriteDone");
 			Messages.console("commandLintSuccess");
 		} catch (e) {
-			console.log(".eslintrc save fail")
+			console.log(".eslintrc save fail");
 		}
 	}
 }
