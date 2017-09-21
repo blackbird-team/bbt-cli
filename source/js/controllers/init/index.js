@@ -1,3 +1,5 @@
+import DepsInstaller from "~/controllers/depsInstaller";
+import StructureDependencies from  "@/structureDependencies";
 import Messages from "@/messages";
 import ParamParser from "./paramParser";
 import GitInit from "./git";
@@ -22,6 +24,7 @@ class Init {
 			.then(this.gitInit.bind(this))
 			.then(this.npmInit.bind(this))
 			.then(this.createStructure.bind(this))
+			.then(this.installDeps.bind(this))
 			.then(Init.firstCommit)
 			.then(this.success.bind(this));
 	}
@@ -56,8 +59,26 @@ class Init {
 		});
 	}
 
+	async installDeps(type = null) {
+		if(type == null) {
+			Messages.replace("step", [6]);
+			DepsInstaller.append("dev", StructureDependencies[this.argv.type].dev);
+			await this.installDeps("dev");
+
+			DepsInstaller.append("prod", StructureDependencies[this.argv.type].prod);
+			await this.installDeps("prod");
+		} else {
+			try {
+				await DepsInstaller.install(type);
+				Messages.console("lintInstallDepsSuccess");
+			} catch (e) {
+				Messages.console("lintInstallDepsFail");
+			}
+		}
+	}
+
 	static firstCommit(){
-		Messages.replace("step", [6]);
+		Messages.replace("step", [7]);
 
 		try {
 			GitInit.firstCommit();
