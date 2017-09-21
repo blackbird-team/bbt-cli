@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { existsSync, writeFileSync, readFileSync } from "fs";
-import { each } from "lodash";
+import { each, union } from "lodash";
 import DepsInstaller from "~/controllers/depsInstaller";
 // import Messages from "@/messages";
 
@@ -15,7 +15,7 @@ class Babel {
 		DepsInstaller.append("dev", ["babel-core", "babel-cli"]);
 	}
 
-	init() {
+	async init(install = true) {
 		this.getConfig();
 
 		each(this.argv.presets, val => {
@@ -26,7 +26,8 @@ class Babel {
 			this.appendPlugin(val);
 		});
 
-		Babel.installDeps().then(this.saveConfig.bind(this));
+		if(install === true) await Babel.installDeps();
+		this.saveConfig();
 	}
 
 	getConfig() {
@@ -51,7 +52,7 @@ class Babel {
 	}
 
 	appendPreset(name) {
-		this.config.presets.push(name);
+		this.config.presets = union(this.config.presets, [name]);
 		DepsInstaller.append("dev", `babel-preset-${name}`);
 	}
 
