@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": [ "bbt" ],
+  "extends": [ "bbt", "bbt-react" ],
   "env": {
     "browser": true
   }
