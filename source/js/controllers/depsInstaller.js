@@ -84,9 +84,8 @@ class DepsInstaller {
 		const newDep = await waitIn(-9);
 		const index = findIndex(DepsInstaller.list[type], val => val === module);
 		if(size(trim(newDep)) > 0) DepsInstaller.list[type].splice(index, 1, newDep);
-		if(newDep === "NOT") {
-			// DepsInstaller.list[type].splice(index, 1);
-		} else await DepsInstaller.checkStep(type, newDep, index);
+		if(newDep === "NOT") DepsInstaller.list[type].splice(index, 1);
+		else await DepsInstaller.checkStep(type, newDep, index);
 	}
 }
 
