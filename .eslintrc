@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"extends": ["airbnb-base", "prettier", "bbt"],
+	"extends": ["bbt"],
 	"rules": {
 		"no-console": 0
 	}
