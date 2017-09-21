@@ -1,5 +1,7 @@
 import DepsInstaller from "~/controllers/depsInstaller";
 import StructureDependencies from  "@/structureDependencies";
+import Babel from "~/controllers/babel";
+import Lint from "~/controllers/lint";
 import Messages from "@/messages";
 import ParamParser from "./paramParser";
 import GitInit from "./git";
@@ -24,6 +26,8 @@ class Init {
 			.then(this.gitInit.bind(this))
 			.then(this.npmInit.bind(this))
 			.then(this.createStructure.bind(this))
+			.then(this.appendBabel.bind(this))
+			.then(this.appendLint.bind(this))
 			.then(this.installDeps.bind(this))
 			.then(Init.firstCommit)
 			.then(this.success.bind(this));
@@ -57,6 +61,20 @@ class Init {
 			this.structure.init();
 			this.structure.on("done", resolve);
 		});
+	}
+
+	async appendBabel() {
+		this.argv.presets = StructureDependencies[this.argv.type].babel.presets;
+		this.argv.plugins = StructureDependencies[this.argv.type].babel.plugins;
+		const babel = new Babel({ argv: this.argv });
+		await babel.init(false);
+	}
+
+	async appendLint() {
+		this.argv.configs = StructureDependencies[this.argv.type].lint.configs;
+		this.argv.plugins = StructureDependencies[this.argv.type].lint.plugins;
+		const lint = new Lint({ argv: this.argv });
+		await lint.init(false);
 	}
 
 	async installDeps(type = null) {

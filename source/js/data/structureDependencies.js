@@ -21,7 +21,15 @@ const StructureDependencies = {
 			"react",
 			"react-dom",
 			"history"
-		]
+		],
+		babel: {
+			presets: ["env"],
+			plugins: ["babel-plugin-root-import", "babel-eslint"]
+		},
+		lint: {
+			configs: ["bbt", "bbt-react"],
+			plugins: ["pre-commit"]
+		}
 	},
 	service: {
 		dev: [
@@ -31,7 +39,15 @@ const StructureDependencies = {
 			"babel-loader",
 			"json-loader"
 		],
-		prod: ["bbt-loader", "redux-store-controller"]
+		prod: ["bbt-loader", "redux-store-controller"],
+		babel: {
+			presets: ["env"],
+			plugins: ["babel-plugin-root-import", "babel-eslint"]
+		},
+		lint: {
+			configs: ["bbt"],
+			plugins: ["pre-commit"]
+		}
 	}
 };
 
