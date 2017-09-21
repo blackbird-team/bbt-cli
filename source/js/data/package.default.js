@@ -6,8 +6,8 @@ const PackageDefault = {
 	scripts: {
 		test: 'echo "Error: no test specified" && exit 1',
 		"lint-staged": "lint-staged",
-		license: "ISC"
-	}
+	},
+	license: "ISC"
 };
 
 export default PackageDefault;
