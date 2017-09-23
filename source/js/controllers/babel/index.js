@@ -2,10 +2,10 @@ import { resolve } from "path";
 import { existsSync, writeFileSync, readFileSync } from "fs";
 import { each, union } from "lodash";
 import DepsInstaller from "~/controllers/depsInstaller";
+import BabelPluginOptions from "@/babelPluginOptions";
 // import Messages from "@/messages";
 
 class Babel {
-
 	argv = null;
 	config = null;
 	pathConfig = resolve("./.babelrc");
@@ -26,7 +26,7 @@ class Babel {
 			this.appendPlugin(val);
 		});
 
-		if(install === true) await Babel.installDeps();
+		if (install === true) await Babel.installDeps();
 		this.saveConfig();
 	}
 
@@ -57,7 +57,13 @@ class Babel {
 	}
 
 	appendPlugin(name) {
-		this.config.plugins.push([name]);
+		const plug = [name];
+		const opt = BabelPluginOptions[name];
+		if (typeof opt === "object") {
+			const rules = this.argv.bbt ? opt.bbt : opt.common;
+			plug.push(rules);
+		}
+		this.config.plugins.push(plug);
 		DepsInstaller.append("dev", name);
 	}
 
@@ -76,7 +82,11 @@ class Babel {
 		// Messages.console("lintConfigWriteStart");
 
 		try {
-			writeFileSync(this.pathConfig, JSON.stringify(this.config, null, 2), "utf8");
+			writeFileSync(
+				this.pathConfig,
+				JSON.stringify(this.config, null, 2),
+				"utf8"
+			);
 
 			// Messages.console("lintConfigWriteDone");
 			// Messages.console("commandLintSuccess");
