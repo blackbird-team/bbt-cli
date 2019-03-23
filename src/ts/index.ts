@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import { parseArgs } from "./parameters";
+import {Argv} from "./argv";
 
 function start(): void {
-	console.log("Works");
-	parseArgs(process.argv);
+	const argv = Argv.parse();
+	console.log(argv.get());
+	console.log(argv.getFlags());
 }
 
 start();
