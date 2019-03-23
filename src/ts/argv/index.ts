@@ -1,3 +1,4 @@
+import { IFlags, FLAG, IParameters, PARAMETER } from "../_interfaces/argv";
 import { Flags } from "./flags";
 import { Routes } from "./routes";
 import { Parameters } from "./parameters";
@@ -33,7 +34,7 @@ class Argv {
 		};
 	}
 
-	public getFlags(): { [key: string]: boolean } {
+	public getFlags(): IFlags {
 		return this._flags.get();
 	}
 
@@ -41,7 +42,7 @@ class Argv {
 		return this._routes.get();
 	}
 
-	public getParameters(): { [key: string]: string } {
+	public getParameters(): IParameters {
 		return this._parameters.get();
 	}
 
@@ -61,11 +62,11 @@ class Argv {
 			this._parameters.parseLastOptionalArgs(this._index);
 			this._stopLoops();
 		} else if (value) {
-			this._parameters.set(key, value);
-		} else if (arg.startsWith("-") && nextArg.startsWith("-")) {
-			this._flags.parseFlag(arg);
-		} else if (arg.startsWith("--")) {
-			this._parameters.set(arg, nextArg);
+			this._parameters.set(key as PARAMETER, value);
+		} else if ((arg.startsWith("-") && !nextArg) || (arg.startsWith("-") && nextArg.startsWith("-"))) {
+			this._flags.parseFlag(arg as FLAG);
+		} else if (arg.startsWith("--") && nextArg) {
+			this._parameters.set(arg as PARAMETER, nextArg);
 			this._index += 1;
 		} else this._routes.add(arg);
 	}

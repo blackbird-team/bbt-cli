@@ -1,14 +1,17 @@
+import { IParameters, PARAMETER } from "./../_interfaces/argv";
 import { _removeInitialDashes } from "./../utils";
 
 export class Parameters {
-	private _parameters: { [key: string]: any } = {};
+	private _parameters: IParameters = {
+		optional: []
+	};
 
-	public get(): { [key: string]: string } {
+	public get(): IParameters {
 		return this._parameters;
 	}
 
-	public set(key: string, value?: string): void {
-		this._parameters[_removeInitialDashes(key)] = value;
+	public set(key: PARAMETER, value?: any): void {
+		this._parameters[_removeInitialDashes(key) as PARAMETER] = value;
 	}
 
 	public parseLastOptionalArgs(index: number): void {
