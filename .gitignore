@@ -1,0 +1,16 @@
+# OS
+*.directory
+*.DS_Store
+
+# IDE and Editors
+/.idea/
+*.iml
+
+/.vs/
+/.vscode/
+
+# library
+/node_modules/
+
+# Prod build
+/bin/
