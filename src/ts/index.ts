@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-import {Argv} from "./argv";
+import Argv from "./argv";
 
 function start(): void {
-	const argv = Argv.parse();
-	console.log(argv.get());
-	console.log(argv.getFlags());
+	console.log(Argv.get());
 }
 
 start();

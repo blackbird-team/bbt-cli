@@ -1,4 +1,4 @@
-import { _removeInitialDashes } from "./index";
+import { _removeInitialDashes } from "./../utils";
 
 export class Flags {
 	private _flags: { [key: string]: boolean } = {};
